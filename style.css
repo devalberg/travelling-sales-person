@@ -126,3 +126,12 @@ h3 {
 .green {
     color: rgb(74, 165, 74);
 }
+
+.img-container {
+    height: 5em;
+    text-align: center;
+}
+
+.img-container img {
+    max-height: 100%;
+}
