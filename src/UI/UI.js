@@ -3,6 +3,7 @@ class UI {
         this.totalDistance = document.getElementById('total-distance');
         this.generation = document.getElementById('generation');
         this.status = document.getElementById('status');
+        console.log(document);
     }
 
     displayTotalDistance(distance) {
