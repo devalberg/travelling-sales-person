@@ -1,32 +1,70 @@
 import UI from './UI';
-import puppeteer from 'puppeteer';
 
 describe("Test UI content change", () => {
-    
     let ui;
-    let browser;
-    let page;
-
-    beforeEach(async() => {
-        browser = await puppeteer.launch({
-            headless: false
-        });
-        page = await browser.newPage();
-        const htmlPath = 'file://C:/Users/danie/Desktop/travelling-sales-person/dist/index.html'
-        await page.goto(htmlPath);
-        ui = new UI();
-        page.addScriptTag(ui);
+    beforeEach(() => {
+        document.body.innerHTML =
+            `<div id="status"> Not running </div>
+             <div id="total-distance"> 0.00 </div>
+             <div id="generation"> 0 </div>`;
+        ui = new UI(document);
     });
 
-    afterEach(async() => {
-        await browser.close();
+    // Status update
+    it('Should throw an error', () => {
+        expect(() => ui.displayStatus(123)).toThrow();
+        expect(() => ui.displayStatus('true')).toThrow();
     });
 
-    it('Should update the status to "Running"', async() => {
-        const statusElement = await page.$('#status');
-        const text = await page.evaluate(el => el.textContent, statusElement);
+    it('Should update the status to "Running" and class of "green"', () => {
+        ui.displayStatus(true);
+        const status = document.getElementById('status');
+        const text = status.innerText;
+        const className = status.className;
+        expect(text).toBe('Running');
+        expect(className).toBe('green');
+    });
+
+    it('Should update the status to "Not running" and class of "red"', () => {
+        ui.displayStatus(true);
         ui.displayStatus(false);
-        expect(text).toBe("Running");
+        const status = document.getElementById('status');
+        const text = status.innerText;
+        const className = status.className;
+        expect(text).toBe('Not running');
+        expect(className).toBe('red');
     });
+
+    // Total Distance update
+    it('Should throw an error', () => {
+        expect(() => ui.displayTotalDistance('1000')).toThrow();
+        expect(() => ui.displayTotalDistance(true)).toThrow();
+    });
+
+    it('Should update Total Distance to 1000.00', () => {
+        ui.displayTotalDistance(1000);
+        const totalDistanceElement = document.getElementById('total-distance');
+        const text = totalDistanceElement.innerText;
+        expect(text).toBe('1000.00');
+    });
+
+    it('Should update give total distance 2 decimals only', () => {
+        ui.displayTotalDistance(1.245667776);
+        const totalDistanceElement = document.getElementById('total-distance');
+        const text = totalDistanceElement.innerText;
+        expect(text).toBe('1.25');
+    });
+
+    // Generation update
+    it('Should throw an error', () => {
+        expect(() => ui.displayGeneration('abc')).toThrow();
+        expect(() => ui.displayGeneration(true)).toThrow();
+    })
+
+    it('Should update generation to 500', () => {
+        ui.displayGeneration(500);
+        const text = document.getElementById('generation').innerText;
+        expect(text).toBe('500');
+    })
 
 })
