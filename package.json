@@ -23,11 +23,16 @@
   },
   "homepage": "https://github.com/devalberg/travelling-sales-person#readme",
   "dependencies": {
+  },
+  "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "babel-loader": "^8.0.5",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.3.1"
+    "webpack-dev-server": "^3.3.1",
+    "jest": "^24.7.1",
+    "jest-puppeteer": "^4.1.1",
+    "puppeteer": "^1.14.0"
   }
 }
