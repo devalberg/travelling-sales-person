@@ -61,4 +61,4 @@ typings/
 .next
 
 # build folder a.k.a dist
-dist/
+dist/*
