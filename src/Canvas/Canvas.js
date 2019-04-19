@@ -5,7 +5,7 @@ class Canvas {
         this.ctx.lineWidth = 2;
         this.vertexSize = 6;
         this.ctx.fillStyle = "rgb(209, 127, 46)";
-        this.ctx.strokeStyle = "grey";
+        this.ctx.strokeStyle = "white";
     }
 
     drawVertices(vertices) {
