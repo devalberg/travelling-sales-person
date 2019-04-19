@@ -1,16 +1,12 @@
 import UI from './UI';
 
-describe("Test UI content change", () => {
+describe("Test Status update", () => {
     let ui;
     beforeEach(() => {
-        document.body.innerHTML =
-            `<div id="status"> Not running </div>
-             <div id="total-distance"> 0.00 </div>
-             <div id="generation"> 0 </div>`;
+        document.body.innerHTML = `<div id="status"> Not running </div>`
         ui = new UI(document);
     });
 
-    // Status update
     it('Should throw an error', () => {
         expect(() => ui.displayStatus(123)).toThrow();
         expect(() => ui.displayStatus('true')).toThrow();
@@ -34,8 +30,15 @@ describe("Test UI content change", () => {
         expect(text).toBe('Not running');
         expect(className).toBe('red');
     });
+});
 
-    // Total Distance update
+describe('Test Total Distance Update', () => {
+    let ui;
+    beforeEach(() => {
+        document.body.innerHTML = '<div id="total-distance"> 0.00 </div>';
+        ui = new UI(document);
+    });
+
     it('Should throw an error', () => {
         expect(() => ui.displayTotalDistance('1000')).toThrow();
         expect(() => ui.displayTotalDistance(true)).toThrow();
@@ -55,7 +58,15 @@ describe("Test UI content change", () => {
         expect(text).toBe('1.25');
     });
 
-    // Generation update
+})
+
+describe("Test Generation Update", () => {
+    let ui;
+    beforeEach(() => {
+        document.body.innerHTML = '<div id="generation"> 0 </div>';
+        ui = new UI(document);
+    });
+
     it('Should throw an error', () => {
         expect(() => ui.displayGeneration('abc')).toThrow();
         expect(() => ui.displayGeneration(true)).toThrow();
