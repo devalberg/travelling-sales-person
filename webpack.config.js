@@ -1,3 +1,4 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -19,5 +20,15 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    plugins: [new HtmlWebpackPlugin({
+        title: "Travelling Sales Person",
+        template: './index.html'
+    })],
+    devServer: {
+        open: true,
+        compress: true,
+        historyApiFallback: true,
+        port: 3000
+    },
 }
