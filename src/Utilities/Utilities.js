@@ -13,7 +13,39 @@ const generateRandomVertexArray = (vertexGenerator, count, xMax, yMax) => {
     return result;
 }
 
+const readFile = async (file) => {
+    try {
+        const fileContents = await readUploadedFileAsText(file)
+        let points = [];
+        const lines = fileContents.split('\n').map(line => {
+            return line.trim().split(' ');
+        });
+        points = lines.map(point => {
+            return { x: point[0], y: point[1] }
+        });
+        return points;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+const readUploadedFileAsText = (inputFile) => {
+    const fileReader = new FileReader();
+
+    return new Promise((resolve, reject) => {
+        fileReader.onerror = () => {
+            fileReader.abort();
+            reject(new DOMException("Problem parsing input file."));
+        };
+        fileReader.onload = () => {
+            resolve(fileReader.result);
+        };
+        fileReader.readAsText(inputFile);
+    });
+}
+
 export default {
     generateRandomVertex,
-    generateRandomVertexArray
+    generateRandomVertexArray,
+    readFile
 }

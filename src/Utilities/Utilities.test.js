@@ -40,3 +40,9 @@ describe("Test GenerateRandomVertexArray", () => {
         expect(result.length).toBe(5);
     });
 })
+
+describe('Test file reader', () => {
+    it("Should read a tsv file and return an array of vertices", () => {
+        // TODO: create test for reading TSV file
+    });
+})
