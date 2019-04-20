@@ -6,6 +6,7 @@ class Canvas {
         this.vertexSize = 10;
         this.fillStyle = "rgb(209, 127, 46)";
         this.ctx.strokeStyle = "white";
+        this.ctx.font = "20px Arial";
         this.delay = 0;
     }
 
@@ -29,6 +30,7 @@ class Canvas {
             this.ctx.rect(x, y, this.vertexSize, this.vertexSize);
             this.ctx.stroke();
             this.ctx.closePath();
+            this.ctx.fillText(i + 1, x, y);
         }
     }
 
