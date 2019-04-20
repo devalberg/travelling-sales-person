@@ -21,7 +21,7 @@ const readFile = async (file) => {
             return line.trim().split(' ');
         });
         points = lines.map(point => {
-            return { x: point[0], y: point[1] }
+            return { x: Number(point[0]), y: Number(point[1]) }
         });
         return points;
     } catch (e) {
