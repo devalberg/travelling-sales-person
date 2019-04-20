@@ -7,7 +7,8 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "dev": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,10 @@
   "bugs": {
     "url": "https://github.com/devalberg/travelling-sales-person/issues"
   },
-  "homepage": "https://github.com/devalberg/travelling-sales-person#readme",
-  "dependencies": {},
+  "homepage": "https://devalberg.github.io/travelling-sales-person",
+  "dependencies": {
+    "gh-pages": "^2.0.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
