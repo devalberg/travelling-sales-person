@@ -78,11 +78,18 @@ describe("Test valid drawEdgesBetweenVertices", () => {
     });
 });
 
-describe("Test drawTour", () => {
-    // uses both tests from above, only needs to test delay in this case.
-    it("Should throw delay error", () => {
-        expect(() => canvas.drawTour([], [], true)).toThrow("Delay must be a positive number or 0");
-        expect(() => canvas.drawTour([], [], "true")).toThrow("Delay must be a positive number or 0");
-        expect(() => canvas.drawTour([], [], -1)).toThrow("Delay must be a positive number or 0");
-    });
+describe("Test set delay", () => {
+    beforeEach(() => {
+        canvas = new Canvas(document);
+    })
+
+    it("Should update delay to 20", () => {
+        canvas.setDelay(20);
+        expect(canvas.delay).toBe(20);
+    })
+
+    it("Should throw error", () => {
+        expect(() => canvas.setDelay(-1)).toThrow();
+        expect(() => canvas.setDelay(true)).toThrow();
+    })
 });

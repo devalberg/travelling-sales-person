@@ -6,6 +6,7 @@ class Canvas {
         this.vertexSize = 6;
         this.ctx.fillStyle = "rgb(209, 127, 46)";
         this.ctx.strokeStyle = "white";
+        this.delay = 0;
     }
 
     drawVertices(vertices) {
@@ -32,10 +33,7 @@ class Canvas {
         this.ctx.closePath();
     }
 
-    drawTour(vertices, edges, delay) {
-        if (typeof delay !== 'number' || delay < 0) {
-            throw "Delay must be a positive number or 0"
-        }
+    drawTour(vertices, edges) {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -44,8 +42,15 @@ class Canvas {
                 }
                 this.drawVertices(vertices);
                 resolve();
-            }, delay);
+            }, this.delay);
         });
+    }
+
+    setDelay(delay) {
+        if (delay < 0 || typeof delay !== 'number') {
+            throw "Delay must be a positive number"
+        }
+        this.delay = delay;
     }
 }
 
@@ -74,7 +79,5 @@ const checkValidVertex = vertex => {
         throw 'Vertex must contain x and y';
     }
 }
-
-
 
 export default Canvas;
