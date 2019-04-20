@@ -3,8 +3,8 @@ class Canvas {
         this.canvas = document.getElementById('my-canvas');
         this.ctx = this.canvas.getContext('2d');
         this.ctx.lineWidth = 1;
-        this.vertexSize = 6;
-        this.ctx.fillStyle = "rgb(209, 127, 46)";
+        this.vertexSize = 10;
+        this.fillStyle = "rgb(209, 127, 46)";
         this.ctx.strokeStyle = "white";
         this.delay = 0;
     }
@@ -13,7 +13,15 @@ class Canvas {
         checkValidVertices(vertices);
 
         let x, y;
-        for (let i = 0; i < vertices.length; i++) {
+
+        this.ctx.fillStyle = 'white';
+        x = vertices[0].x - (this.vertexSize / 2);
+        y = vertices[0].y - (this.vertexSize / 2);
+        this.ctx.fillRect(x, y, this.vertexSize, this.vertexSize);
+        this.ctx.rect(x, y, this.vertexSize, this.vertexSize);
+
+        this.ctx.fillStyle = this.fillStyle;
+        for (let i = 1; i < vertices.length; i++) {
             x = vertices[i].x - (this.vertexSize / 2);
             y = vertices[i].y - (this.vertexSize / 2);
             this.ctx.beginPath();
