@@ -1,4 +1,5 @@
 import Tour from './Tour';
+import TSP from '../TSP/TSP';
 
 let tour;
 
@@ -52,3 +53,16 @@ describe("Test update tour properties", () => {
         expect(tour.edges).toEqual(edges);
     });
 })
+
+describe("Test reset tour", () => {
+    it("Should set all properties to empty", () => {
+        tour = new Tour();
+        tour.edges = [1, 2, 3, 4, 5, 6]
+        tour.vertices = [1, 2, 3, 4, 5, 6]
+        tour.totalDistance = 1000;
+        tour.resetTour();
+        expect(tour.edges).toEqual([]);
+        expect(tour.vertices).toEqual([]);
+        expect(tour.totalDistance).toBe(0);
+    });
+});

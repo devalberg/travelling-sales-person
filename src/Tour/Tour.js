@@ -5,6 +5,12 @@ class Tour {
         this.edges = [];
     }
 
+    resetTour() {
+        this.totalDistance = 0;
+        this.vertices = [];
+        this.edges = [];
+    }
+
     calculateEdgeLength(edge) {
         // calculate and return Euclidean distance between the two vertices
         const deltaXsqaured = Math.pow(edge.v1.x - edge.v2.x, 2);
