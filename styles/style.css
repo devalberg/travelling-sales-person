@@ -84,6 +84,10 @@ input[type="number"]:focus {
     text-align: center;
 }
 
+#upload-problem {
+    text-align: center;
+}
+
 #user-file {
     width: 0.1px;
     height: 0.1px;

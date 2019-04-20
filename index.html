@@ -34,7 +34,7 @@
 
                 <form id="set-delay-form">
                     <label for="delay">Visualization delay:</label>
-                    <input id="delay" type="number" min="0" max="100" value="0" />
+                    <input id="delay" type="number" min="0" max="10000" value="0" />
                     <button type="submit">Set delay</button>
                 </form>
 
@@ -49,18 +49,23 @@
             <form id="random-problem-form" class="section">
                 <h3>Generate Random Problem</h3>
                 <label for="vertices">Number of Vertices</label>
-                <input id="vertices" type="number" min="4" max="2000" value="15" />
+                <input id="vertices" type="number" min="4" max="1000" value="15" />
                 <button type="submit">Generate!</button>
             </form>
 
-            <form id="upload-problem" class="section">
+            <div class="section">
                 <h3>Upload your problem</h3>
-                <div class="upload-group">
-                    <input type="file" id="user-file" />
-                    <label for="user-file"><i class="fas fa-upload"></i> Upload .tsv File</label>
-                </div>
-                <small><b>format:</b> 1 vertex per line, x and y separated by single space</small>
-            </form>
+                <form id="upload-problem">
+                    <div class="upload-group">
+                        <input type="file" id="user-file" />
+                        <label for="user-file" id="user-file-label"><i class="fas fa-upload"></i> Upload .tsv File</label>
+                    </div>
+                    <button type="submit">Load file</button>
+                    <br>
+                    <br>
+                    <small><b>format:</b> 1 vertex per line, x and y separated by single space</small>
+                </form>
+            </div>
 
         </div>
 
