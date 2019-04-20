@@ -8,8 +8,12 @@ class TSP {
     }
 
     setupTour(vertices) {
-        this.tour.vertices = vertices;
+        this.tour.vertices = [...vertices];
         this.tour.updateTourProperties();
+        this.canvas.drawTour(this.tour.vertices, this.tour.edges);
+        this.ui.displayTotalDistance(this.tour.totalDistance);
+        this.ui.displayGeneration(0);
+        this.tempTour.resetTour();
     }
 
     runSimulation() {
@@ -25,7 +29,7 @@ class TSP {
 
     twoOptSwap(i, k) {
         // take route[0] to route[i - 1] and add them in order to new_route
-        for (let a = 0; a <= i - 1; a++) {
+        for (let a = 0; a < i; a++) {
             this.tempTour.vertices[a] = this.tour.vertices[a];
         }
 
@@ -47,6 +51,7 @@ class TSP {
     async twoOpt() {
         let improved = true;
         let generation = 0;
+        this.ui.displayGeneration(generation);
         this.ui.displayStatus(true);
         const n = this.tour.vertices.length;
 
@@ -61,17 +66,19 @@ class TSP {
                     this.ui.displayGeneration(generation)
 
                     if (this.tempTour.totalDistance < this.tour.totalDistance) {
-                        this.tour = Object.assign(Object.create(Object.getPrototypeOf(this.tempTour)), this.tour);
                         improved = true;
+                        for (let i = 0; i < n; i++) {
+                            this.tour.vertices[i] = this.tempTour.vertices[i];
+                        }
+                        this.tour.updateTourProperties();
+                        this.ui.displayTotalDistance(this.tour.totalDistance);
+                        await this.canvas.drawTour(this.tour.vertices, this.tour.edges);
                     }
-
-                    this.ui.displayTotalDistance(this.tour.totalDistance);
-                    await this.canvas.drawTour(this.tour.vertices, this.tour.edges);
                 }
             }
         }
-        this.running = false;
         this.ui.displayStatus(false);
+        this.running = false;
     }
 }
 
