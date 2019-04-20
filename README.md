@@ -1,6 +1,7 @@
 # Travelling Sales Person
 A simple TSP problem solved using 2-opt algorithm with visualization. 
-Hosting at: [https://devalberg.github.io/travelling-sales-person/](https://devalberg.github.io/travelling-sales-person/)
+
+Hosted at: [https://devalberg.github.io/travelling-sales-person/](https://devalberg.github.io/travelling-sales-person/)
 
 ## About project
 This project is written in JavaScript (ES6) and uses html and canvas as visualizers.
