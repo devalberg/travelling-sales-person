@@ -7,9 +7,13 @@ class MockTour {
         this.vertices = [];
         this.tourUpdated = false;
         this.totalDistance;
+        this.tourReset = false;
     }
     updateTourProperties() {
         this.tourUpdated = true;
+    }
+    resetTour() {
+        this.tourReset = true;
     }
 }
 
@@ -50,6 +54,12 @@ describe("Test setupTour", () => {
         expect(tsp.tour.vertices).toEqual([1, 2, 3, 4, 5]);
         expect(tsp.tour.tourUpdated).toEqual(true);
     });
+
+    it("Should call the tempTour's resetTour", () => {
+        expect(tsp.tempTour.tourReset).toBe(false);
+        tsp.setupTour([1, 2, 3, 4, 5]);
+        expect(tsp.tempTour.tourReset).toBe(true);
+    })
 })
 
 describe("Test runSimulation", () => {
