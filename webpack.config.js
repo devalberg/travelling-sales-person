@@ -1,4 +1,5 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -24,7 +25,11 @@ module.exports = {
     plugins: [new HtmlWebpackPlugin({
         title: "Travelling Sales Person",
         template: './index.html'
-    })],
+    }),
+    new CopyWebpackPlugin([
+        { from: 'styles', to: 'styles' },
+        { from: 'images', to: 'images' },
+    ])],
     devServer: {
         open: true,
         compress: true,
