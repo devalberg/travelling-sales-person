@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Travelling Sales Person</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="./images/favicon.png" />
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="left-grid">
+            <div class="img-container">
+                <img src="./images/favicon.png" alt="logo">
+            </div>
+            <h1>Travelling Sales Person</h1>
+            <h2>using 2-opt algorithm</h2>
+
+            <div id="controls" class="section">
+                <h3>Controls</h3>
+                <div class="start-stop">
+                    <button id="start-simulation">Start simulation</button>
+                    <button id="stop-simulation">Stop simulation</button>
+                    <p><b>Status:</b> <span id="status" class="green">Not running</span></p>
+                </div>
+
+                <form id="set-delay-form">
+                    <label for="delay">Visualization delay:</label>
+                    <input id="delay" type="number" min="0" max="10000" value="0" />
+                    <button type="submit">Set delay</button>
+                </form>
+
+            </div>
+
+            <div id="stats" class="section">
+                <h3>Stats</h3>
+                <p><b>Total Distance: </b> <span id="total-distance">0</span></p>
+                <p><b>Generation: </b> <span id="generation">0</span></p>
+            </div>
+
+            <form id="random-problem-form" class="section">
+                <h3>Generate Random Problem</h3>
+                <label for="vertices">Number of Vertices</label>
+                <input id="vertices" type="number" min="4" max="1000" value="15" />
+                <button type="submit">Generate!</button>
+            </form>
+
+            <div class="section">
+                <h3>Upload your problem</h3>
+                <form id="upload-problem">
+                    <div class="upload-group">
+                        <input type="file" id="user-file" />
+                        <label for="user-file" id="user-file-label"><i class="fas fa-upload"></i> Upload .tsv File</label>
+                    </div>
+                    <button type="submit">Load file</button>
+                    <br>
+                    <br>
+                    <small><b>format:</b> 1 vertex per line, x and y separated by single space</small>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="right-grid">
+            <canvas id="my-canvas" width="800" height="800">Canvas not supported on your browser!</canvas>
+        </div>
+
+    </div>
+
+<script type="text/javascript" src="main.bundle.js"></script></body>
+
+</html>
