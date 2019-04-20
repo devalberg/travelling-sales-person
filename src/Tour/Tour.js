@@ -6,6 +6,7 @@ class Tour {
     }
 
     calculateEdgeLength(edge) {
+        // calculate and return Euclidean distance between the two vertices
         const deltaXsqaured = Math.pow(edge.v1.x - edge.v2.x, 2);
         const deltaYsqaured = Math.pow(edge.v1.y - edge.v2.y, 2);
         return Number(Math.sqrt(deltaXsqaured + deltaYsqaured).toFixed(2));
@@ -14,6 +15,7 @@ class Tour {
     updateTourProperties() {
         let edges = [];
         let distance = 0;
+        // create edges and calculate distance along the way (round trip)
         for (let i = 0; i < this.vertices.length; i++) {
             if (i < this.vertices.length - 1) {
                 edges.push({ v1: this.vertices[i], v2: this.vertices[i + 1] });
