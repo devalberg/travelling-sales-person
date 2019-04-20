@@ -2,7 +2,7 @@ class Canvas {
     constructor(document) {
         this.canvas = document.getElementById('my-canvas');
         this.ctx = this.canvas.getContext('2d');
-        this.ctx.lineWidth = 2;
+        this.ctx.lineWidth = 1;
         this.vertexSize = 6;
         this.ctx.fillStyle = "rgb(209, 127, 46)";
         this.ctx.strokeStyle = "white";
@@ -12,9 +12,10 @@ class Canvas {
     drawVertices(vertices) {
         checkValidVertices(vertices);
 
+        let x, y;
         for (let i = 0; i < vertices.length; i++) {
-            const x = vertices[i].x - (this.vertexSize / 2);
-            const y = vertices[i].y - (this.vertexSize / 2);
+            x = vertices[i].x - (this.vertexSize / 2);
+            y = vertices[i].y - (this.vertexSize / 2);
             this.ctx.beginPath();
             this.ctx.fillRect(x, y, this.vertexSize, this.vertexSize);
             this.ctx.rect(x, y, this.vertexSize, this.vertexSize);
