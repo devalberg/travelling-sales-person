@@ -15,15 +15,13 @@ const generateRandomVertexArray = (vertexGenerator, count, xMax, yMax) => {
 
 const readFile = async (file) => {
     try {
-        const fileContents = await readUploadedFileAsText(file)
-        let points = [];
-        const lines = fileContents.split('\n').map(line => {
-            return line.trim().split(' ');
-        });
-        points = lines.map(point => {
-            return { x: Number(point[0]), y: Number(point[1]) }
-        });
-        return points;
+        const fileContents = await readUploadedFileAsText(file);
+        const vertices = fileContents
+            .split('\n')
+            .map(line => line.trim().split(' '))
+            .map(line => ({ x: Number(line[0]), y: Number(line[1]) }));
+
+        return vertices;
     } catch (e) {
         console.log(e);
     }
