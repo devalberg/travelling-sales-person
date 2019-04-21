@@ -5,42 +5,23 @@ let tsp;
 class MockTour {
     constructor() {
         this.vertices = [];
-        this.tourUpdated = false;
         this.totalDistance;
-        this.tourReset = false;
-    }
-    updateTourProperties() {
-        this.tourUpdated = true;
-    }
-    resetTour() {
-        this.tourReset = true;
+        this.updateTourProperties = jest.fn()
+        this.resetTour = jest.fn();
     }
 }
 
 class MockUI {
     constructor() {
-        this.displayStatusCalled = false;
-        this.displayTotalDistanceCalled = false;
-        this.displayGenerationCalled = false;
-    }
-    displayStatus() {
-        this.displayStatusCalled = true;
-    }
-    displayTotalDistance() {
-        this.displayTotalDistanceCalled = true;
-    }
-    displayGeneration() {
-        this.displayGenerationCalled = true;
+        this.displayStatus = jest.fn();
+        this.displayTotalDistance = jest.fn();
+        this.displayGeneration = jest.fn();
     }
 }
 
 class MockCanvas {
     constructor() {
-        this.drawTourCalled = false;
-    }
-
-    drawTour() {
-        this.drawTourCalled = true;
+        this.drawTour = jest.fn();
     }
 }
 
@@ -52,13 +33,13 @@ describe("Test setupTour", () => {
     it("Should set up the tour according to vertices given and execute tour's updateTourProperties", () => {
         tsp.setupTour([1, 2, 3, 4, 5]);
         expect(tsp.tour.vertices).toEqual([1, 2, 3, 4, 5]);
-        expect(tsp.tour.tourUpdated).toEqual(true);
+        expect(tsp.tour.updateTourProperties.mock.calls.length).toBe(1);
     });
 
     it("Should call the tempTour's resetTour", () => {
-        expect(tsp.tempTour.tourReset).toBe(false);
+        expect(tsp.tempTour.resetTour.mock.calls.length).toBe(0);
         tsp.setupTour([1, 2, 3, 4, 5]);
-        expect(tsp.tempTour.tourReset).toBe(true);
+        expect(tsp.tempTour.resetTour.mock.calls.length).toBe(1);
     })
 })
 
@@ -86,12 +67,10 @@ describe("Test twoOptSwap", () => {
         const input = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'A'];
         const output = ['A', 'B', 'C', 'G', 'F', 'E', 'D', 'H', 'A'];
         tsp.tour.vertices = input;
-        tsp.tempTour.updateExecuted = false;
         tsp.twoOptSwap(3, 6);
-        expect(tsp.tempTour.vertices).toEqual(output);
-        expect(tsp.tempTour.tourUpdated).toBe(true);
-
+        expect(tsp.tempTour.updateTourProperties.mock.calls.length).toBeGreaterThanOrEqual(1);
         // check to see if original tour is still the same
+        expect(tsp.tempTour.vertices).toEqual(output);
         expect(tsp.tour.vertices).toEqual(input);
     })
 })
@@ -104,26 +83,25 @@ describe("Test twoOpt", () => {
     });
 
     it("Should call twoOptSwap to swap points", () => {
-        tsp.twoOptSwapCalled = false;
-        tsp.twoOptSwap = (i, j) => { tsp.twoOptSwapCalled = true }
+        tsp.twoOptSwap = jest.fn();
         tsp.twoOpt();
-        expect(tsp.twoOptSwapCalled).toBe(true);
+        expect(tsp.twoOptSwap.mock.calls.length).toBeGreaterThanOrEqual(1);
     });
 
     it("Should call its UI displayStatus", () => {
         tsp.twoOpt();
-        expect(tsp.ui.displayStatusCalled).toBe(true);
+        expect(tsp.ui.displayStatus.mock.calls.length).toBeGreaterThanOrEqual(1);
     });
 
     it("Should call its UI displayTotalDistance", () => {
         let tourDistance = 0;
         tsp.twoOptSwap = (i, j) => { tsp.tour.totalDistance = tourDistance++; tsp.tempTour.totalDistance = 5 }
         tsp.twoOpt();
-        expect(tsp.ui.displayTotalDistanceCalled).toBe(true);
+        expect(tsp.ui.displayTotalDistance.mock.calls.length).toBeGreaterThanOrEqual(1);
     });
 
     it("Should call its UI displayGeneration", () => {
         tsp.twoOpt();
-        expect(tsp.ui.displayGenerationCalled).toBe(true);
+        expect(tsp.ui.displayGeneration.mock.calls.length).toBeGreaterThanOrEqual(1);
     });
 });
