@@ -1,5 +1,4 @@
 import Tour from './Tour';
-import TSP from '../TSP/TSP';
 
 let tour;
 
