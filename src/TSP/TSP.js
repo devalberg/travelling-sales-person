@@ -67,9 +67,7 @@ class TSP {
 
                     if (this.tempTour.totalDistance < this.tour.totalDistance) {
                         improved = true;
-                        for (let i = 0; i < n; i++) {
-                            this.tour.vertices[i] = this.tempTour.vertices[i];
-                        }
+                        this.tour.vertices = [...this.tempTour.vertices];
                         this.tour.updateTourProperties();
                         this.ui.displayTotalDistance(this.tour.totalDistance);
                         await this.canvas.drawTour(this.tour.vertices, this.tour.edges);
